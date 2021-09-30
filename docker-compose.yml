@@ -1,0 +1,50 @@
+version: '3.7'
+services:
+    web.app:
+        build:
+            context: ./docker/8.0
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: duck-8.0/app
+        working_dir: '/var/www/html'
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '${APP_PORT:-80}:80'
+        environment:
+            WWWUSER: '${WWWUSER}'
+        volumes:
+            - 'duck-sync:/var/www/html'
+        networks:
+            - duck-network
+        depends_on:
+            - mariadb
+            
+    mariadb:
+        image: 'mariadb:10'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        volumes:
+            - 'duckmariadb:/var/lib/mysql'
+        networks:
+            - duck-network
+        healthcheck:
+          test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
+          retries: 3
+          timeout: 5s
+          
+networks:
+    duck-network:
+        driver: bridge
+volumes:
+    duckmariadb:
+        driver: local
+    duck-sync:
+        external: true
