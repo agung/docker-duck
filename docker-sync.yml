@@ -6,7 +6,7 @@ options:
     max_attempt: 3000
 
 syncs:
-    lemp-sync:
+    duck-sync:
         notify_terminal: true
         src: "./"
         sync_strategy: "unison"

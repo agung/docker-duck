@@ -138,7 +138,7 @@ if [ $# -gt 0 ]; then
         fi
 
     # Stop docker and docker sync
-    elif [ "$1" == "stop" ] ; then
+    elif [ "$1" == "sync-stop" ] ; then
         shift 1
     
         docker-sync stop
