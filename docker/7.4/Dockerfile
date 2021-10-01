@@ -34,6 +34,18 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Install ioncube
+RUN cd /tmp \
+    && curl -O https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_aarch64.tar.gz \
+    && tar zxvf ioncube_loaders_lin_aarch64.tar.gz \
+    && export PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;") \
+    && export PHP_EXT_DIR=$(php-config --extension-dir) \
+    && cp "./ioncube/ioncube_loader_lin_${PHP_VERSION}.so" "${PHP_EXT_DIR}/ioncube.so" \
+    && echo "[PHP]\nzend_extension = ${PHP_EXT_DIR}/ioncube.so" >> /etc/php/7.2/cli/conf.d/00-ioncube.ini \
+    && rm -rf ./ioncube \
+    && rm ioncube_loaders_lin_aarch64.tar.gz \
+    && rm -rf /tmp/*
+
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php7.4
 
 RUN groupadd --force -g $WWWGROUP duck
@@ -41,9 +53,11 @@ RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 duck
 
 COPY start-container /usr/local/bin/start-container
 COPY default.conf /etc/nginx/sites-enabled/default
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY php.ini /etc/php/7.4/cli/conf.d/00-duck.ini
 COPY php.ini /etc/php/7.4/fpm/conf.d/00-duck.ini
+COPY www.conf /etc/php/7.4/fpm/pool.d/www.conf
 RUN chmod +x /usr/local/bin/start-container
 
 EXPOSE 80 8000 9000
