@@ -1,5 +1,5 @@
 {
-  "name": "duck/docker-duck",
+  "name": "agung/docker-duck",
   "version": "1.0.0",
   "description": "Docker compose generate for magento platform",
   "type": "magento2-module",
