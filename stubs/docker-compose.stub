@@ -2,7 +2,7 @@ version: '3.7'
 services:
     {{service}}:
         build:
-            context: ./vendor/duck/compose-generate/docker/${PHP_VERSION:-{{php_version}}}
+            context: ./vendor/agung/docker-duck/docker/${PHP_VERSION:-{{php_version}}}
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
