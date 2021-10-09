@@ -1,0 +1,9 @@
+    elasticsearch:
+        image: 'elasticsearch:{{elasticsearch_version}}'
+        environment:
+            discovery.type: 'single-node'
+        ports:
+            - '${ELASTICSEARCH_PORT_REQ:-9200}:9200'
+            - '${ELASTICSEARCH_PORT_COM:-9300}:9300'
+        networks:
+            - duck-network

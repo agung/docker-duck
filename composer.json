@@ -1,0 +1,20 @@
+{
+  "name": "duck/docker-duck",
+  "version": "1.0.0",
+  "description": "Docker compose generate for magento platform",
+  "type": "magento2-module",
+  "require": {
+    "magento/framework": "*"
+  },
+  "license": [
+    "GNU General Public License (GPL)"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Duck\\ComposeGenerate\\": ""
+    }
+  }
+}
