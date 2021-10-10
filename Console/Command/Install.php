@@ -103,6 +103,7 @@ class Install extends AbstractSetupCommand
     {
         $this->buildDockerCompose($input->getOptions());
         $this->buildDockerSync($input->getOptions());
+        $this->buildEnvironmentVariable($input->getOption('service-app'));
         
         return Cli::RETURN_SUCCESS;
     }
@@ -182,6 +183,21 @@ class Install extends AbstractSetupCommand
         $root = $this->filesystem->getDirectoryRead(DirectoryList::ROOT)
             ->getAbsolutePath('/');
         file_put_contents($root . 'docker-sync.yml', $dockerSync);
+    }
+    
+    /**
+     * Build environment variable
+     * 
+     * @param string $serviceApp
+     */
+    protected function buildEnvironmentVariable(string $serviceApp)
+    {
+        $stub = file_get_contents(__DIR__ . "/../../stubs/.env.stub");
+        $environment = str_replace("{{APP_SERVICE}}", $serviceApp, $stub);
+        
+        $root = $this->filesystem->getDirectoryRead(DirectoryList::ROOT)
+            ->getAbsolutePath('/');
+        file_put_contents($root . '.env', $environment);
     }
 
     /**

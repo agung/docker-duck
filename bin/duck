@@ -154,6 +154,17 @@ if [ $# -gt 0 ]; then
         else
             duck_is_not_running
         fi
+        
+    # delete container
+    elif [ "$1" == "clean" ] ; then
+        shift 1
+
+        docker-sync clean
+        if [ "$EXEC" == "yes" ]; then
+            docker-compose down
+        else
+            duck_is_not_running
+        fi
 
     # Pass unknown commands to the "docker-compose" binary...
     else

@@ -16,4 +16,12 @@ composer require "agung/docker-duck":"dev-magento" --dev
 alias duck='[ -f duck ] && bash duck || bash vendor/agung/docker-duck/bin/duck'
 ```
 4. For generate docker compose file run `php bin/magento duck:compose:install`
-5. Create `.env` file in your root project, the environment variable should be contain MYSQL, see environment variable in `docker-compose.yml`
+5. Update database config in `.env` file
+6. Create installation magento by command
+```
+duck php bin/magento setup:install --base-url=http://magento.local \
+--db-host={{db service}} --db-name=magento --db-user=duck --db-password=duck \
+--admin-firstname=Agung --admin-lastname=Nugraha --admin-email=nugraha.an96@gmail.com \
+--admin-user=nugraha --admin-password=Password123 --language=en_US \
+--currency=IDR --timezone=Asia/Jakarta --use-rewrites=1
+```
