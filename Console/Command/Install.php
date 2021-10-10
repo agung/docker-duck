@@ -2,11 +2,12 @@
 
 namespace Duck\ComposeGenerate\Console\Command;
 
-use Duck\ComposeGenerate\Model\VersionInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Console\Cli;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Validation\ValidationException;
-use Symfony\Component\Console\Command\Command;
+use Magento\Setup\Console\Command\AbstractSetupCommand;
+use Duck\ComposeGenerate\Model\VersionInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -15,7 +16,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class Install extends Command
+class Install extends AbstractSetupCommand
 {
     /**
      * @var Filesystem
@@ -98,10 +99,12 @@ class Install extends Command
      *
      * @return void
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->buildDockerCompose($input->getOptions());
         $this->buildDockerSync($input->getOptions());
+        
+        return Cli::RETURN_SUCCESS;
     }
 
     /**
