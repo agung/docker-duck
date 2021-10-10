@@ -137,8 +137,10 @@ class Install extends AbstractSetupCommand
         $volumes = array_map(function ($service) {
             return "    duck{$service}:\n        driver: local";
         }, $volumes);
+        // set volume for docker-sync
+        $volumes = implode("\n", $volumes) . "\n    {$services['service-app']}-sync:\n        external: true";
         if (!empty($volumes)) {
-            $volumes = "volumes:\n" . implode("\n", $volumes);
+            $volumes = "volumes:\n" . $volumes;
         }
 
         $dockerCompose = file_get_contents(__DIR__ . '/../../stubs/docker-compose.stub');
