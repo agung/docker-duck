@@ -9,7 +9,7 @@ This is an magento module provided for run your project
 2. Install docker-duck using composer
 ```
 composer config repositories.docker-duck git git@github.com:agung/docker-duck.git
-composer require "agung/docker-duck":"dev-magento" --dev
+composer require "docker-duck/compose":"^1.0.0" --dev
 ```
 3. Create aliases duck shell command in your `.bashrc` or `.zshrc`
 ```
