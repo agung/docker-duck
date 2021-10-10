@@ -2,7 +2,7 @@
 
 namespace Duck\ComposeGenerate\Model;
 
-class Version implements VersionInterface
+class Version
 {
     protected string $elasticsearch;
     protected string $mariadb;

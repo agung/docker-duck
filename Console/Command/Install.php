@@ -7,7 +7,7 @@ use Magento\Framework\Console\Cli;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Validation\ValidationException;
 use Magento\Setup\Console\Command\AbstractSetupCommand;
-use Duck\ComposeGenerate\Model\VersionInterface;
+use Duck\ComposeGenerate\Model\Version;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -24,7 +24,7 @@ class Install extends AbstractSetupCommand
     protected $filesystem;
 
     /**
-     * @var VersionInterface
+     * @var Version
      */
     protected $version;
 
@@ -32,9 +32,9 @@ class Install extends AbstractSetupCommand
      * InstallConstruct
      *
      * @param Filesystem $filesystem
-     * @param VersionInterface $version
+     * @param Version $version
      */
-    public function __construct(Filesystem $filesystem, VersionInterface $version)
+    public function __construct(Filesystem $filesystem, Version $version)
     {
         $this->filesystem = $filesystem;
         $this->version = $version;

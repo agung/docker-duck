@@ -10,6 +10,4 @@
             </argument>
         </arguments>
     </type>
-    <preference for="Duck\ComposeGenerate\Model\VersionInterface"
-                type="Duck\ComposeGenerate\Model\Version"/>
 </config>
