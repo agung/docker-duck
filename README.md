@@ -1,5 +1,5 @@
 <h1 align="center">DOCKER DUCK</h1>
-Duck is powered docker environment for magento or any apps, it's inspired by [Laravel Sail](https://github.com/laravel/sail)
+Duck is powered docker environment for magento or any apps, it's inspired by <a href="https://github.com/laravel/sail">Laravel Sail</a>.
 
 # Installation
 How to install docker-duck for your magento project <br>
