@@ -4,10 +4,10 @@ namespace Duck\ComposeGenerate\Model;
 
 class Version
 {
-    protected string $elasticsearch;
-    protected string $mariadb;
-    protected string $redis;
-    protected string $php;
+    protected $elasticsearch;
+    protected $mariadb;
+    protected $redis;
+    protected $php;
 
     /**
      * Magento version
