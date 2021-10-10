@@ -13,7 +13,7 @@ composer require "agung/docker-duck":"dev-magento" --dev
 ```
 3. Create aliases duck shell command in your `.bashrc` or `.zshrc`
 ```
-alias duck='[ -f duck ] && bash duck || bash vendor/agung/docker-duck/bin/duck'
+alias duck='[ -f duck ] && bash duck || bash vendor/docker-duck/compose/bin/duck'
 ```
 4. For generate docker compose file run `php bin/magento duck:compose:install`
 5. Update database config in `.env` file
