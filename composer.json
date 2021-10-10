@@ -6,9 +6,6 @@
     "config": {
         "sort-packages": true
     },
-    "require": {
-        "magento/framework": "*"
-    },
     "license": [
         "GNU General Public License (GPL)"
     ],
