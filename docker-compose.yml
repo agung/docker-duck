@@ -21,7 +21,7 @@ services:
             - mariadb
             
     mariadb:
-        image: 'mariadb:10'
+        image: 'mariadb:10.4'
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
@@ -38,6 +38,13 @@ services:
           test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
           retries: 3
           timeout: 5s
+
+    redis:
+        image: 'redis:6.0-alpine'
+        ports:
+            - '${REDIS_PORT:-6379}:6379'
+        networks:
+            - duck-network
           
 networks:
     duck-network:
